@@ -5,11 +5,6 @@ import CharInfo from "../charInfo/CharInfo";
 
 import decoration from '../../resources/img/vision.png';
 
-import MarvelService from "../../service/MarvelService";
-
-const one = new MarvelService();
-one.getAllCharacters().then(data => data.data.results.forEach(item => console.log(item.name)))
-
 const App = () => {
     return (
         <div className="app">
