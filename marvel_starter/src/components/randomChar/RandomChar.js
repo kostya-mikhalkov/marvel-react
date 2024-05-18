@@ -29,14 +29,6 @@ class RandomChar extends Component {
 
     render() {
         const {char : {name, description, thumbnail, homepage, wiki}} = this.state;
-        function truncateText(text, maxLength) {
-            if (text && text.length > maxLength) {
-              return text.substring(0, maxLength - 3) + '...';
-            } else {
-              return text;
-            }
-          }
-        const changeText = truncateText(description, 10);
 
         return (
             <div className="randomchar">
@@ -45,7 +37,7 @@ class RandomChar extends Component {
                     <div className="randomchar__info">
                         <p className="randomchar__name">{name}</p>
                         <p className="randomchar__descr">
-                            {changeText}
+                            {description}
                         </p>
                         <div className="randomchar__btns">
                             <a href={homepage} className="button button__main">
