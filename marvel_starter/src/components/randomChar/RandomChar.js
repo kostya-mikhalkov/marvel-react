@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import ClampLines from 'react-clamp-lines';
 
 import './randomChar.scss';
 import mjolnir from '../../resources/img/mjolnir.png';
@@ -28,6 +29,15 @@ class RandomChar extends Component {
 
     render() {
         const {char : {name, description, thumbnail, homepage, wiki}} = this.state;
+        function truncateText(text, maxLength) {
+            if (text && text.length > maxLength) {
+              return text.substring(0, maxLength - 3) + '...';
+            } else {
+              return text;
+            }
+          }
+        const changeText = truncateText(description, 10);
+
         return (
             <div className="randomchar">
                 <div className="randomchar__block">
@@ -35,7 +45,7 @@ class RandomChar extends Component {
                     <div className="randomchar__info">
                         <p className="randomchar__name">{name}</p>
                         <p className="randomchar__descr">
-                            {description}
+                            {changeText}
                         </p>
                         <div className="randomchar__btns">
                             <a href={homepage} className="button button__main">
