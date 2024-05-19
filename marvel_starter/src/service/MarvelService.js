@@ -20,13 +20,21 @@ class MarvelService {
     }
 
     _transformCharacter = ({name, description, thumbnail, ...res}) => {
+        const imgNotAvalible = thumbnail.path.slice(thumbnail.path.length - 9, thumbnail.path.length);
+        let bool;
+        if (imgNotAvalible === 'available') {
+            bool = true;
+        } else {
+            bool = false;
+        }
         return {
             name: name,
             description: description.length > 210 ? `${description.slice(0, description.length - 3)}...`:
                          description ? description : 'Sorry',
             thumbnail: thumbnail.path + '.' + thumbnail.extension,
             homepage: res.urls[0].url,
-            wiki: res.urls[1].url
+            wiki: res.urls[1].url,
+            bool: bool
         }
     }
 }

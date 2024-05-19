@@ -8,10 +8,6 @@ import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../error/Error';
 
 class RandomChar extends Component {
-    constructor(props) {
-        super(props);
-        this.updateChar();
-    }
     state = {
         char: {},
         loading: true,
@@ -20,7 +16,17 @@ class RandomChar extends Component {
 
     marvelSerice = new MarvelService();
 
+    componentDidMount() {
+        this.updateChar();
+        // this.timer = setInterval(this.updateChar, 3000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timer);
+    }
+
     onCharLoaded = (char) => {
+        console.log(char)
         this.setState({char, loading: false})
     }
 
@@ -55,7 +61,8 @@ class RandomChar extends Component {
                     <p className="randomchar__title">
                         Or choose another one
                     </p>
-                    <button className="button button__main">
+                    <button className="button button__main"
+                            onClick={this.updateChar}>
                         <div className="inner">try it</div>
                     </button>
                     <img src={mjolnir} alt="mjolnir" className="randomchar__decoration"/>
@@ -66,10 +73,11 @@ class RandomChar extends Component {
 }
 
 const View = ({char}) => {
-    const {name, thumbnail, description, homepage, wiki} = char;
+    const {name, thumbnail, description, homepage, wiki, bool} = char;
+    const styleImg = bool ? 'contain' : 'cover';
     return (
         <div className="randomchar__block">
-            <img src={thumbnail} alt="Random character" className="randomchar__img"/>
+            <img src={thumbnail} style={{objectFit: `${styleImg}`}} alt="Random character" className="randomchar__img"/>
             <div className="randomchar__info">
                 <p className="randomchar__name">{name}</p>
                 <p className="randomchar__descr">
