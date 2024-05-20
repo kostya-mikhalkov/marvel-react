@@ -19,7 +19,7 @@ class MarvelService {
         return this._transformCharacter(res.data.results[0]);
     }
 
-    _transformCharacter = ({name, description, thumbnail, ...res}) => {
+    _transformCharacter = ({name, description, thumbnail, id, ...res}) => {
         const imgNotAvalible = thumbnail.path.slice(thumbnail.path.length - 9, thumbnail.path.length);
         let bool;
         if (imgNotAvalible === 'available') {
@@ -28,6 +28,7 @@ class MarvelService {
             bool = false;
         }
         return {
+            id: id,
             name: name,
             description: description.length > 190 ? `${description.slice(0, description.length - 3)}...`:
                          description ? description : 'Sorry',

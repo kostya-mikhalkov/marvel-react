@@ -7,6 +7,7 @@ import './charList.scss';
 import abyss from '../../resources/img/abyss.jpg';
 
 class CharList extends Component {
+
     state = {
         char: [],
         loading: true,
@@ -44,10 +45,12 @@ class CharList extends Component {
         const {char, loading, error} = this.state;
         const spinner = loading ? <Spinner /> : null;
         const errorMessage = error ? <ErrorMessage /> : null;
-        const elem = char.map(({name, thumbnail, bool}) => {
+        const elem = char.map(({name, thumbnail, bool, id}) => {
             let charImgStyle = bool ? 'contain' : 'cover';
             return (
-                <li className="char__item">
+                <li className="char__item"
+                    key={id}
+                    onClick={() => this.props.onChangeId(id)}>
                     <img src={thumbnail} style={{objectFit: `${charImgStyle}`}} alt="abyss"/>
                     <div className="char__name">{name}</div>
                 </li>
