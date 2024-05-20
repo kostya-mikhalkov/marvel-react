@@ -11,7 +11,7 @@ class MarvelService {
 
     getAllCharacters = async () => {
         const res = await this.getResource("https://gateway.marvel.com:443/v1/public/characters?limit=9&offset=20&apikey=916197d592e0c46ca82d7a622dfd9d5d");
-        return this._transformCharacter(res);
+        return res.data.results.map(item => this._transformCharacter(item));
     }
 
     getCharacters = async (id) => {
@@ -29,7 +29,7 @@ class MarvelService {
         }
         return {
             name: name,
-            description: description.length > 210 ? `${description.slice(0, description.length - 3)}...`:
+            description: description.length > 190 ? `${description.slice(0, description.length - 3)}...`:
                          description ? description : 'Sorry',
             thumbnail: thumbnail.path + '.' + thumbnail.extension,
             homepage: res.urls[0].url,
