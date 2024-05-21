@@ -40,11 +40,7 @@ class CharList extends Component {
             error: true
         })
     }
-
-    render() {
-        const {char, loading, error} = this.state;
-        const spinner = loading ? <Spinner /> : null;
-        const errorMessage = error ? <ErrorMessage /> : null;
+    onRenderListElemnt = (char) => {
         const elem = char.map(({name, thumbnail, bool, id}) => {
             let charImgStyle = bool ? 'contain' : 'cover';
             return (
@@ -57,10 +53,22 @@ class CharList extends Component {
             )
         });
         return (
+            <ul className="char__grid">
+                {elem}
+            </ul>
+        )
+    }
+
+    render() {
+        const {char, loading, error} = this.state;
+        const spinner = loading ? <Spinner /> : null;
+        const errorMessage = error ? <ErrorMessage /> : null;
+        const elem = this.onRenderListElemnt(char);
+        const content = !(loading || error) ? elem : null;
+
+        return (
             <div className="char__list">
-                <ul className="char__grid">
-                    {spinner || errorMessage || elem}
-                </ul>
+                    {spinner || errorMessage || content}
                 <button className="button button__main button__long">
                     <div className="inner">load more</div>
                 </button>

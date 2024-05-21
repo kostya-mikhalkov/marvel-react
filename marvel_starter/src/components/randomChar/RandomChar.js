@@ -38,6 +38,9 @@ class RandomChar extends Component {
     }
 
     updateChar = () => {
+        this.setState({
+            loading: true
+        })
         let id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
         this.marvelSerice
             .getCharacters(id)
