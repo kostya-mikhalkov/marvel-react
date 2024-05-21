@@ -10,7 +10,7 @@ class MarvelService {
     }
 
     getAllCharacters = async () => {
-        const res = await this.getResource("https://gateway.marvel.com:443/v1/public/characters?limit=9&offset=20&apikey=916197d592e0c46ca82d7a622dfd9d5d");
+        const res = await this.getResource("https://gateway.marvel.com:443/v1/public/characters?limit=9&offset=210&apikey=916197d592e0c46ca82d7a622dfd9d5d");
         return res.data.results.map(item => this._transformCharacter(item));
     }
 
@@ -35,7 +35,8 @@ class MarvelService {
             thumbnail: thumbnail.path + '.' + thumbnail.extension,
             homepage: res.urls[0].url,
             wiki: res.urls[1].url,
-            bool: bool
+            bool: bool,
+            comics: res.comics.items
         }
     }
 }
