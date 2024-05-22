@@ -66,36 +66,42 @@ class CharInfo extends Component {
 }
 
 const View = (char) => {
-    const {name, thumbnail, description, homepage, wiki, comics} = char.char;
+    const {name, thumbnail, description, homepage, wiki, comics, bool} = char.char;
+    const styleImg = bool ? 'contain' : 'cover';
     return (
         <>
-                  <div className="char__basics">
-                    <img src={thumbnail} alt={name}/>
-                    <div>
-                        <div className="char__info-name">{name}</div>
-                        <div className="char__btns">
-                            <a href={homepage} className="button button__main">
-                                <div className="inner">homepage</div>
-                            </a>
-                            <a href={wiki} className="button button__secondary">
-                                <div className="inner">Wiki</div>
-                            </a>
-                        </div>
+                <div className="char__basics">
+                <img src={thumbnail} 
+                     alt={name}
+                     style={{objectFit: `${styleImg}`}}/>
+                <div>
+                    <div className="char__info-name">{name}</div>
+                    <div className="char__btns">
+                        <a href={homepage} className="button button__main">
+                            <div className="inner">homepage</div>
+                        </a>
+                        <a href={wiki} className="button button__secondary">
+                            <div className="inner">Wiki</div>
+                        </a>
                     </div>
                 </div>
-                <div className="char__descr">
-                    {description}
-                </div>
-                <div className="char__comics">Comics:</div>
-                <ul className="char__comics-list">
-                    {comics.map(item => {
+            </div>
+            <div className="char__descr">
+                {description}
+            </div>
+            <div className="char__comics">{comics.length !== 0 ? 'Comics:' : 'Sorry, but this character doesn\'t have any comics in our database'}</div>
+            <ul className="char__comics-list">
+                {comics.map((item, i) => {
+                        if (i <= 9) {
                             return (
-                                <li className="char__comics-item">
-                                     {item.name}
+                                <li className="char__comics-item"
+                                    key={i}>
+                                        {item.name}
                                 </li>
                             )
-                        })}
-                </ul>
+                        }
+                    })}
+            </ul>
         </>      
     )
 }
