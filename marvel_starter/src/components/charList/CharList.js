@@ -25,6 +25,7 @@ class CharList extends Component {
             .getAllCharacters()
             .then(this.onCharLoaded)
             .catch(this.onErrorMessage)
+
     }
 
     onCharLoaded = (char) => {
