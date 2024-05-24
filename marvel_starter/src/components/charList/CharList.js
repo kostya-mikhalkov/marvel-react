@@ -2,9 +2,9 @@ import { Component } from 'react';
 import MarvelService from '../../service/MarvelService';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../error/Error';
+import { PropTypes } from 'prop-types';
 
 import './charList.scss';
-import abyss from '../../resources/img/abyss.jpg';
 
 class CharList extends Component {
 
@@ -59,7 +59,7 @@ class CharList extends Component {
                 <li className="char__item"
                     key={id}
                     onClick={() => this.props.onChangeId(id)}>
-                    <img src={thumbnail} style={{objectFit: `${charImgStyle}`}} alt="abyss"/>
+                    <img src={thumbnail} style={{objectFit: `${charImgStyle}`}} alt={name}/>
                     <div className="char__name">{name}</div>
                 </li>
             )
@@ -93,3 +93,7 @@ class CharList extends Component {
 }
 
 export default CharList;
+
+CharList.propTypes = {
+    onChangeId: PropTypes.func.isRequired
+}
