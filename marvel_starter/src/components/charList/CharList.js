@@ -57,7 +57,7 @@ class CharList extends Component {
     }
     onChangeBorder = (e,id) => {
         const elements = document.querySelectorAll(".char__item");
-        e.target.classList.add("activeBg")
+        e.currentTarget.classList.add("activeBg")
         this.props.onChangeId(id)
     }
     onRenderListElemnt = (char) => {
