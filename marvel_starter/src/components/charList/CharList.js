@@ -16,6 +16,9 @@ class CharList extends Component {
         offset: 210,
         charEnded: false
     }
+    setRefFunction(elem) {
+        this.myRef = elem
+    }
 
     marvel = new MarvelService();
 
@@ -52,13 +55,20 @@ class CharList extends Component {
             error: true
         })
     }
+    onChangeBorder = (e,id) => {
+        const elements = document.querySelectorAll(".char__item");
+        e.target.classList.add("activeBg")
+        this.props.onChangeId(id)
+    }
     onRenderListElemnt = (char) => {
-        const elem = char.map(({name, thumbnail, bool, id}) => {
+        const elem = char.map(({name, thumbnail, bool, id}, ind) => {
             let charImgStyle = bool ? 'contain' : 'cover';
             return (
                 <li className="char__item"
                     key={id}
-                    onClick={() => this.props.onChangeId(id)}>
+                    onClick={(e) => this.onChangeBorder(e,id)}
+                    tabIndex={ind}
+                    ref={this.setRefFunction()}>
                     <img src={thumbnail} style={{objectFit: `${charImgStyle}`}} alt="abyss"/>
                     <div className="char__name">{name}</div>
                 </li>
