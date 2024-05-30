@@ -16,8 +16,9 @@ class CharList extends Component {
         offset: 210,
         charEnded: false
     }
-    setRefFunction(elem) {
-        this.myRef = elem
+    arrRef = [];
+    setRefFunction = (elem) => {
+        this.arrRef.push(elem);
     }
 
     marvel = new MarvelService();
@@ -55,18 +56,30 @@ class CharList extends Component {
             error: true
         })
     }
-    onChangeBorder = (e,id) => {
-        const elements = document.querySelectorAll(".char__item");
-        e.currentTarget.classList.add("activeBg")
+    onChangeBorder = (ind,id) => {
+        // const elements = document.querySelectorAll(".char__item");
+        // elements.forEach(item => item.classList.remove("activeBg"))
+        // e.currentTarget.classList.add("activeBg")
+        this.arrRef.forEach(item => item.classList.remove("activeBg"))
+        this.arrRef[ind].classList.add("activeBg");
         this.props.onChangeId(id)
+    }
+    onChangeInTab = (e, ind, id) => {
+        if (e.key === 'Tab') {
+            this.onChangeBorder(ind, id);
+        }
     }
     onRenderListElemnt = (char) => {
         const elem = char.map(({name, thumbnail, bool, id}, ind) => {
             let charImgStyle = bool ? 'contain' : 'cover';
             return (
                 <li className="char__item"
+                    ind={ind}
+                    ref={this.setRefFunction}
                     key={id}
-                    onClick={() => this.props.onChangeId(id)}>
+                    tabIndex={0}
+                    onClick={() => this.onChangeBorder(ind, id)}
+                    onKeyDown={(e) => this.onChangeInTab(e, ind, id)}>
                     <img src={thumbnail} style={{objectFit: `${charImgStyle}`}} alt="abyss"/>
                     <div className="char__name">{name}</div>
                 </li>
@@ -85,7 +98,7 @@ class CharList extends Component {
         const errorMessage = error ? <ErrorMessage /> : null;
         const elem = this.onRenderListElemnt(char);
         const content = !(loading || error) ? elem : null;
-
+        console.log(this.arrRef)
         return (
             <div className="char__list">
                     {spinner || errorMessage || content}
