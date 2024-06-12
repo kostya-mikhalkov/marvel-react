@@ -1,27 +1,21 @@
-class MarvelService {
-    _offsetReq = 210;
-    getResource = async (url) => {
-        let res = await fetch(url);
+import { useHttp } from "../hooks/http.hooks";
 
-        if (!res.ok) {
-            throw new Error("Please sorry your URL in error")
-        }
+const MarvelService = () => {
+    const _offsetReq = 210;
+    const {loading, request, error} = useHttp();
 
-        return await res.json();
-    }
-
-    getAllCharacters = async (offset = this._offsetReq) => {
-        const res = await this.getResource(`https://gateway.marvel.com:443/v1/public/characters?limit=9&offset=${offset}&apikey=916197d592e0c46ca82d7a622dfd9d5d
+    const getAllCharacters = async (offset = _offsetReq) => {
+        const res = await request(`https://gateway.marvel.com:443/v1/public/characters?limit=9&offset=${offset}&apikey=916197d592e0c46ca82d7a622dfd9d5d
         `);
-        return res.data.results.map(item => this._transformCharacter(item));
+        return res.data.results.map(item => _transformCharacter(item));
     }
 
-    getCharacters = async (id) => {
-        const res = await this.getResource(`https://gateway.marvel.com:443/v1/public/characters/${id}?apikey=916197d592e0c46ca82d7a622dfd9d5d`);
-        return this._transformCharacter(res.data.results[0]);
+    const getCharacters = async (id) => {
+        const res = await request(`https://gateway.marvel.com:443/v1/public/characters/${id}?apikey=916197d592e0c46ca82d7a622dfd9d5d`);
+        return _transformCharacter(res.data.results[0]);
     }
 
-    _transformCharacter = ({name, description, thumbnail, id, ...res}) => {
+    const _transformCharacter = ({name, description, thumbnail, id, ...res}) => {
         const imgNotAvalible = thumbnail.path.slice(thumbnail.path.length - 9, thumbnail.path.length);
         let bool;
         if (imgNotAvalible === 'available') {
@@ -41,6 +35,7 @@ class MarvelService {
             comics: res.comics.items
         }
     }
+    return {loading, error, getAllCharacters, getCharacters};
 }
 
 export default MarvelService;

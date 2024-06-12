@@ -30,7 +30,7 @@ function RandomChar() {
     useEffect(() => {
         const timer = setInterval(() => {
             updateChar()
-        }, 3000);
+        }, 90000);
         return () => clearInterval(timer)
     }, [])
 
