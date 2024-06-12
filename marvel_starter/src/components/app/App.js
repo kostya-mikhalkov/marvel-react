@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { useState} from "react";
 
 import AppHeader from "../appHeader/AppHeader";
 import RandomChar from "../randomChar/RandomChar";
@@ -8,20 +8,13 @@ import ErrorBoundary from "../../errorboundary/ErrorBoundary";
 
 import decoration from '../../resources/img/vision.png';
 
-class App extends Component {
-    state = {
-        charId: null
+function App() {
+    const [charId, setCharId] = useState(null);
+
+    const onChangeId = (id) => {
+        setCharId(charId => id)
     }
 
-    onChangeId = (id) => {
-        this.setState({
-            charId: id
-        })
-    }
-    // static getDerivedStateFromProps () {
-    //     return {charId: 1011399}
-    // }
-    render() {
         return (
             <div className="app">
                 <ErrorBoundary>
@@ -31,10 +24,10 @@ class App extends Component {
                     <RandomChar/>
                     <div className="char__content">
                         <ErrorBoundary>
-                            <CharList onChangeId={this.onChangeId}/>
+                            <CharList onChangeId={onChangeId}/>
                         </ErrorBoundary>
                         <ErrorBoundary>
-                            <CharInfo charId={this.state.charId}/>
+                            <CharInfo charId={charId}/>
                         </ErrorBoundary>
                     </div>
                     <img className="bg-decoration" src={decoration} alt="vision"/>
@@ -42,6 +35,5 @@ class App extends Component {
             </div>
         )
     }
-}
 
 export default App;
