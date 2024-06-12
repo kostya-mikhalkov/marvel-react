@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { Component } from "react";
 
 import AppHeader from "../appHeader/AppHeader";
 import RandomChar from "../randomChar/RandomChar";
@@ -8,11 +8,15 @@ import ErrorBoundary from "../../errorboundary/ErrorBoundary";
 
 import decoration from '../../resources/img/vision.png';
 
-function App() {
-    const [charId, setCharId] = useState(null);
+class App extends Component {
+    state = {
+        charId: null
+    }
 
-    const onChangeId = (id) => {
-        setCharId(charId => id)
+    onChangeId = (id) => {
+        this.setState({
+            charId: id
+        })
     }
 
         return (
