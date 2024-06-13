@@ -13,11 +13,8 @@ function RandomChar() {
     //     loading: true,
     //     error: false
     // }
-    const [char, setChar] = useState({});
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
-
-   const marvelSerice = new MarvelService();
+   const [char, setChar] = useState({});;
+   const {loading, error, getCharacters} = MarvelService();
 
     // componentDidMount() {
     //     this.updateChar();
@@ -41,25 +38,13 @@ function RandomChar() {
 
     const onCharLoaded = (char) => {
         setChar(char);
-        setLoading(false);
     }
 
-    const onError = () => {
-        // this.setState({
-        //     loading: false,
-        //     error: true
-        // })
-        setLoading(false)
-        setLoading(true)
-    }
 
     const updateChar = () => {
-        setLoading(true)
         let id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
-            marvelSerice
-            .getCharacters(id)
+            getCharacters(id)
             .then(onCharLoaded)
-            .catch(onError)
     }
 
         const errorMessage = error ? <ErrorMessage /> : null;

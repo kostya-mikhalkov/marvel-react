@@ -2,7 +2,7 @@ import { useHttp } from "../hooks/http.hooks";
 
 const MarvelService = () => {
     const _offsetReq = 210;
-    const {loading, request, error} = useHttp();
+    const {loading, request, error, clearError} = useHttp();
 
     const getAllCharacters = async (offset = _offsetReq) => {
         const res = await request(`https://gateway.marvel.com:443/v1/public/characters?limit=9&offset=${offset}&apikey=916197d592e0c46ca82d7a622dfd9d5d
@@ -35,7 +35,7 @@ const MarvelService = () => {
             comics: res.comics.items
         }
     }
-    return {loading, error, getAllCharacters, getCharacters};
+    return {loading, error, getAllCharacters, getCharacters, clearError};
 }
 
 export default MarvelService;

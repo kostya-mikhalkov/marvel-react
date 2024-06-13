@@ -17,30 +17,25 @@ function CharList(props) {
     //     charEnded: false
     // }
     const [char, setChar] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
     const [newItemLoaded, setNewItemLoaded] = useState(false);
     const [offset, setOffset] = useState(210);
     const [charEnded, setCharEnded] = useState(false);
 
     const arrRef = useRef([]);
 
-    const marvel = new MarvelService();
+    const {loading, error, getAllCharacters} = MarvelService();
 
     // componentDidMount() {
     //     this.onRequest();
     // }
     useEffect(() => {
-        onRequest();
+        onRequest(offset, true);
     },[])
 
-    const onRequest = (offset) => {
-        setNewItemLoaded(true)
-            marvel
-            .getAllCharacters(offset)
+    const onRequest = (offset, initial) => {
+        initial ? setNewItemLoaded(false) : setNewItemLoaded(true);
+            getAllCharacters(offset)
             .then(onCharLoaded)
-            .catch(onErrorMessage)
-
     }
     const onCharLoaded = (newChar) => {
         let ended = false;
@@ -55,19 +50,11 @@ function CharList(props) {
         //     charEnded: ended
         // })))
         setChar(char => [...char, ...newChar]);
-        setLoading(false);
         setNewItemLoaded(false);
         setOffset(offset => offset + 9);
         setCharEnded(ended);
     }
-    const onErrorMessage = () => {
-        // this.setState({
-        //     loading: false,
-        //     error: true
-        // })
-        setLoading(false);
-        setError(true)
-    }
+
     const onChangeBorder = (ind,id) => {
         arrRef.current.forEach(item => item.classList.remove("activeBg"))
         arrRef.current[ind].classList.add("activeBg");
@@ -101,14 +88,13 @@ function CharList(props) {
         )
     }
 
-        const spinner = loading ? <Spinner /> : null;
+        const spinner = loading && !newItemLoaded ? <Spinner /> : null;
         const errorMessage = error ? <ErrorMessage /> : null;
         const elem = onRenderListElemnt(char);
-        const content = !(loading || error) ? elem : null;
         console.log(arrRef)
         return (
             <div className="char__list">
-                    {spinner || errorMessage || content}
+                    {spinner || errorMessage || elem}
                 <button className="button button__main button__long"
                         disabled={newItemLoaded}
                         style={{'display': charEnded ? 'none' : 'block'}}

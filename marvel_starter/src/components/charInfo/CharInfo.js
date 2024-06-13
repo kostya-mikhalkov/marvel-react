@@ -15,10 +15,8 @@ function CharInfo(props) {
     //     error: false
     // }
     const [char, setChar] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
 
-    const marvel = new MarvelService();
+    const {loading, error, getAllCharacters, getCharacters} = MarvelService();
 
     // componentDidMount() {
     //     this.updateChar();
@@ -41,27 +39,14 @@ function CharInfo(props) {
         if (!charId) {
             return
         }
-        setLoading(true);
-            marvel
-            .getCharacters(charId)
-            .then(onCharLoaded)
-            .catch(onCharError)
-    }
+            getCharacters(charId)
+            .then(onCharLoaded)    }
     const onCharLoaded = (char) => {
         // this.setState({
         //     char,
         //     loading: false,
         // })
         setChar(char);
-        setLoading(false);
-    }
-    const onCharError = () => {
-        // this.setState({
-        //     loading: false,
-        //     error: true
-        // })
-        setLoading(false);
-        setError(true);
     }
 
         const skeleton = char || loading || error ? null : <Skeleton />;
