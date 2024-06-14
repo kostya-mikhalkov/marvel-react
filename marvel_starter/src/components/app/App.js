@@ -5,6 +5,7 @@ import RandomChar from "../randomChar/RandomChar";
 import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
 import ErrorBoundary from "../../errorboundary/ErrorBoundary";
+import { Comics } from "../page_comics/comics/comics";
 
 import decoration from '../../resources/img/vision.png';
 
@@ -22,7 +23,7 @@ function App() {
                     <AppHeader/>
                 </ErrorBoundary>
                 <main>
-                    <RandomChar/>
+                    {/* <RandomChar/>
                     <div className="char__content">
                         <ErrorBoundary>
                             <CharList onChangeId={onChangeId}/>
@@ -31,7 +32,8 @@ function App() {
                             <CharInfo charId={charId}/>
                         </ErrorBoundary>
                     </div>
-                    <img className="bg-decoration" src={decoration} alt="vision"/>
+                    <img className="bg-decoration" src={decoration} alt="vision"/> */}
+                    <Comics />
                 </main>
             </div>
         )

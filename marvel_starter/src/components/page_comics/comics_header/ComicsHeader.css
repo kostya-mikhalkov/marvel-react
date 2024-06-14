@@ -1,0 +1,16 @@
+.comics__header {
+    width: 1100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    background: #232222;
+}
+.comics_text {
+    font-weight: 700;
+    font-size: 24px;
+    color: #fff;
+    padding-right: 427px;
+}
+.comics__aven {
+    padding-right: 83px;
+}
