@@ -1,0 +1,12 @@
+.comics__list {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 100px;
+}
+
+.comics__item {
+    font-weight: 700;
+    font-size: 12px;
+    color: #fffefe;
+}
