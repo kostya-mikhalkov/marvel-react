@@ -8,7 +8,7 @@ import '../../charList/charList.scss';
 
 export const Comics = () => {
     const [char, setChar] = useState([]);
-    const [charId, setCharId] = useState([]); // Ensure charId is initialized as an array
+    const [charId, setCharId] = useState([]); 
     const [id, setId] = useState(null);
     const [newItemLoaded, setNewItemLoaded] = useState(false);
     const [offset, setOffset] = useState(210);
@@ -97,10 +97,11 @@ export const Comics = () => {
                                     <h2>{title}</h2>
                                     <p>{description}</p>
                                     <span>{prices}</span>
+                                    <span>{pageCount}</span>
                                 </div>
                             </div>
                             <div className="charId__btn">
-                                Back to list
+                                <button onClick={() => setId(null)}>Back to list</button>
                             </div>
                         </li>
                     )
@@ -124,7 +125,7 @@ export const Comics = () => {
         <div>
             <ComicsHeader />
             {loadPage || errorPage || elem}
-            {elem ? <button className="button button__main button__long"
+            {(id == null) && elem ? <button className="button button__main button__long"
                         disabled={newItemLoaded}
                         style={{'display': charEnded ? 'none' : 'block'}}
                         onClick={() => onRequest(offset)}>

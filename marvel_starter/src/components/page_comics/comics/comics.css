@@ -12,7 +12,26 @@
 }
 .charId__item {
     display: flex;
+    gap: 127px;
 }
 .charId__flex {
     display: flex;
+    gap: 50px;
+}
+.charId__flex > img {
+    width: 293px;
+    height: 450px;
+}
+.charId__box {
+    width: 550px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.charId__btn > button{
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
+    background: transparent;
+    border: none;
 }
