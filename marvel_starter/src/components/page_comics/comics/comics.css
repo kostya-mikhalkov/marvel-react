@@ -10,3 +10,9 @@
     font-size: 12px;
     color: #fffefe;
 }
+.charId__item {
+    display: flex;
+}
+.charId__flex {
+    display: flex;
+}
