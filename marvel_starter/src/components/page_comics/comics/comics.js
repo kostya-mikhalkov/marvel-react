@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { ComicsHeader } from "../comics_header/ComicsHeader";
 import { ComicsServices } from "../../../service/ComicsServices";
 import Spinner from "../../spinner/Spinner";
@@ -72,14 +73,16 @@ export const Comics = () => {
             elem = char.map(({id, prices, images, description, title, bool}, ind) => {
                 let charImgStyle = bool ? 'contain' : 'cover';
                 return (
-                    <li className="char__item"
-                        key={id}
+                    <li key={id}
                         ref={el => arrRef.current[ind] = el}
                         tabIndex={0}
                         onClick={() => onChangeBorder(ind, id)}>
-                        <img src={images} style={{objectFit: `${charImgStyle}`}} alt="abyss"/>
-                        <div className="char__name comics__item">{title}</div>
-                        <span>{prices}</span>
+                        <Link className="char__item"
+                              to={`/comics/${id}`}>
+                            <img src={images} style={{objectFit: `${charImgStyle}`}} alt="abyss"/>
+                            <div className="char__name comics__item">{title}</div>
+                            <span>{prices}</span>
+                        </Link>
                     </li>
                 );
             });
