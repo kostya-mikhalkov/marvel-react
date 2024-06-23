@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ComicsServices } from '../../../service/ComicsServices';
 import '../comics/comics.css';
 
-export const SinglePage = () => {
+const SinglePage = () => {
     const [char, setCharId] = useState([])
     const {comicId} = useParams();
     const {getCharacters} = ComicsServices();
@@ -42,3 +42,4 @@ export const SinglePage = () => {
     </div>
     )
 }
+export default SinglePage;

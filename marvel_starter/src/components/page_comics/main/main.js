@@ -7,7 +7,7 @@ import ErrorBoundary from "../../../errorboundary/ErrorBoundary";
 
 import decoration from '../../../resources/img/vision.png';
 
-export const Main = () => {
+const Main = () => {
     const [charId, setCharId] = useState(null)
 
     const onChangeId = (id) => {
@@ -28,3 +28,4 @@ export const Main = () => {
         </>
     )
 }
+export default Main;

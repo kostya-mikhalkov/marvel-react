@@ -1,6 +1,6 @@
 import ErrorMessage from "../../error/Error";
 
-export const LostPage = () => {
+const LostPage = () => {
     return (
         <>
             <ErrorMessage />
@@ -8,3 +8,4 @@ export const LostPage = () => {
         </>
     )
 }
+export default LostPage;

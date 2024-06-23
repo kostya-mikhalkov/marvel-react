@@ -7,7 +7,7 @@ import ErrorMessage from "../../error/Error";
 import './comics.css';
 import '../../charList/charList.scss';
 
-export const Comics = () => {
+const Comics = () => {
     const [char, setChar] = useState([]);
     const [charId, setCharId] = useState([]); 
     const [id, setId] = useState(null);
@@ -68,51 +68,22 @@ export const Comics = () => {
     }
 
     const onRenderListElemnt = () => {
-        let elem;
-        if (id == null) {
-            elem = char.map(({id, prices, images, description, title, bool}, ind) => {
-                let charImgStyle = bool ? 'contain' : 'cover';
-                return (
-                    <li key={id}
-                        ref={el => arrRef.current[ind] = el}
-                        tabIndex={0}
-                        onClick={() => onChangeBorder(ind, id)}>
-                        <Link className="char__item"
-                              to={`/comics/${id}`}>
-                            <img src={images} style={{objectFit: `${charImgStyle}`}} alt="abyss"/>
-                            <div className="char__name comics__item">{title}</div>
-                            <span>{prices}</span>
-                        </Link>
-                    </li>
-                );
-            });
-        } else {
-            if (Array.isArray(charId)) {
-                elem = charId.map(({images, description, title, prices, pageCount}, ind) => {
-                    return (
-                        <li className="charId__item"
-                            key={ind}>
-                            <div className="charId__flex">
-                                <img src={images} 
-                                    className="charId__img"
-                                    alt="img" />
-                                <div className="charId__box">
-                                    <h2>{title}</h2>
-                                    <p>{description}</p>
-                                    <span>{prices}</span>
-                                    <span>{pageCount}</span>
-                                </div>
-                            </div>
-                            <div className="charId__btn">
-                                <button onClick={() => setId(null)}>Back to list</button>
-                            </div>
-                        </li>
-                    )
-                });
-            } else {
-                elem = <div>No data available</div>; // Handle case where charId is not an array
-            }
-        }
+        let elem = char.map(({id, prices, images, description, title, bool}, ind) => {
+            let charImgStyle = bool ? 'contain' : 'cover';
+            return (
+                <li key={id}
+                    ref={el => arrRef.current[ind] = el}
+                    tabIndex={0}
+                    onClick={() => onChangeBorder(ind, id)}>
+                    <Link className="char__item"
+                          to={`/comics/${id}`}>
+                        <img src={images} style={{objectFit: `${charImgStyle}`}} alt="abyss"/>
+                        <div className="char__name comics__item">{title}</div>
+                        <span>{prices}</span>
+                    </Link>
+                </li>
+            );
+        });
         return (
             <ul className="comics__list">
                 {elem}
@@ -137,3 +108,4 @@ export const Comics = () => {
         </div>
     )
 }
+export default Comics;
