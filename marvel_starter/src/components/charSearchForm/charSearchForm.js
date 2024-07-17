@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage as FormikErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import MarvelService from '../../service/MarvelService';
@@ -61,9 +62,10 @@ const CharSearchForm = () => {
                                 <div className="inner">find</div>
                             </button>
                             {char && char.data && char.data.results.length !== 0 && (
-                                <button className='button button__main'>
+                                <Link className='button button__main'
+                                      to={`/characters/${char.data.results[0].id}`}>
                                     <div className="inner">View</div>
-                                </button>
+                                </Link>
                             )}
                         </div>
                     </div>

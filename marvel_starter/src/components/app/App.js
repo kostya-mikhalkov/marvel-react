@@ -11,6 +11,7 @@ const Main = lazy(() => import('../page_comics/main/main.js'));
 const Comics = lazy(() => import('../page_comics/comics/comics.js'));
 const SinglePage = lazy(() => import('../page_comics/singlePage/SinglePage.js'));
 const LostPage = lazy(() => import('../page_comics/lostPage/lostPage.js'));
+const FindPage = lazy(() => import('../findPage/findPage.js'));
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
                                 <Route path="/" element={<Main />}/>
                                 <Route path="/comics" element={<Comics />}/>
                                 <Route path="/comics/:comicId" element={<SinglePage />}/>
+                                <Route path="/characters/:charId" element={<FindPage />}/>
                                 <Route path="*" element={<LostPage />}/>
                        </Routes>
                    </Suspense>
