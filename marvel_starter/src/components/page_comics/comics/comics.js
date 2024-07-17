@@ -8,6 +8,7 @@ import './comics.css';
 import '../../charList/charList.scss';
 
 const Comics = () => {
+    console.log('Module is starting')
     const [char, setChar] = useState([]);
     const [charId, setCharId] = useState([]); 
     const [id, setId] = useState(null);

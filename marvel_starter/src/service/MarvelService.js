@@ -15,6 +15,11 @@ const MarvelService = () => {
         return _transformCharacter(res.data.results[0]);
     }
 
+    const getCharactersByName = async (name) => {
+        const res = await request(`https://gateway.marvel.com:443/v1/public/characters?name=${name}&apikey=916197d592e0c46ca82d7a622dfd9d5d`);
+        return res;
+    }
+
     const _transformCharacter = ({name, description, thumbnail, id, ...res}) => {
         const imgNotAvalible = thumbnail.path.slice(thumbnail.path.length - 9, thumbnail.path.length);
         let bool;
@@ -35,7 +40,7 @@ const MarvelService = () => {
             comics: res.comics.items
         }
     }
-    return {loading, error, getAllCharacters, getCharacters, clearError};
+    return {loading, error, getAllCharacters, getCharacters, clearError, getCharactersByName};
 }
 
 export default MarvelService;

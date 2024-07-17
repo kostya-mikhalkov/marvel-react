@@ -4,6 +4,7 @@ import CharInfo from "../../charInfo/CharInfo";
 import CharList from "../../charList/CharList";
 import RandomChar from "../../randomChar/RandomChar";
 import ErrorBoundary from "../../../errorboundary/ErrorBoundary";
+import CharSearchForm from "../../charSearchForm/charSearchForm";
 
 import decoration from '../../../resources/img/vision.png';
 
@@ -22,6 +23,9 @@ const Main = () => {
                 </ErrorBoundary>
                 <ErrorBoundary>
                     <CharInfo charId={charId}/>
+                </ErrorBoundary>
+                <ErrorBoundary>
+                    <CharSearchForm />
                 </ErrorBoundary>
             </div>
             <img className="bg-decoration" src={decoration} alt="vision"/>
