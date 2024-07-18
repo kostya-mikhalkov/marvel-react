@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from 'react-helmet-async';
 
 import CharInfo from "../../charInfo/CharInfo";
 import CharList from "../../charList/CharList";
@@ -16,17 +17,26 @@ const Main = () => {
     }
     return (
         <>
+            <Helmet>
+            <meta
+            name="description"
+            content="Marvel information portal"
+            />
+            <title>Marvel portal</title>
+            </Helmet>
             <RandomChar/>
             <div className="char__content">
                 <ErrorBoundary>
                     <CharList onChangeId={onChangeId}/>
                 </ErrorBoundary>
+                <div>
                 <ErrorBoundary>
                     <CharInfo charId={charId}/>
                 </ErrorBoundary>
                 <ErrorBoundary>
                     <CharSearchForm />
                 </ErrorBoundary>
+                </div>
             </div>
             <img className="bg-decoration" src={decoration} alt="vision"/>
         </>

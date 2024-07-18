@@ -1,14 +1,18 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { useState, useEffect } from 'react';
 import { ComicsServices } from "../../service/ComicsServices";
+import MarvelService from "../../service/MarvelService";
+import AppBanner from '../appBanner/AppBanner';
+import '../page_comics/comics/comics.css';
 
 const FindPage = () => {
     const [char, setCharId] = useState([]);
     const {charId} = useParams();
-    const {getCharacters} = ComicsServices();
+    const {getCharacters} = MarvelService();
     const navigate = useNavigate();
     const goBack = () => {
-        navigate('/comics')
+        navigate('/')
     }
     useEffect(() => {
         onRequestId(charId)
@@ -20,25 +24,34 @@ const FindPage = () => {
 
     const onCharLoadedId = (char) => {
         setCharId(char)
+        console.log(char)
     }
-    const {images, title, description, prices, pageCount} = char;
+    const {thumbnail, title, description} = char;
     return (
-    <div className="charId__item">
-        <div className="charId__flex">
-            <img src={images} 
+        <>
+        <Helmet>
+            <meta
+            name="description"
+            content="Comics portal"
+            />
+            <title>Comics portal</title>
+        </Helmet>
+            <AppBanner />
+        <div className="charId__item  findPages">
+            <div className="charId__flex">
+            <img src={thumbnail} 
                 className="charId__img"
                 alt="img" />
             <div className="charId__box">
                 <h2>{title}</h2>
                 <p>{description}</p>
-                <span>{prices}</span>
-                <span>{pageCount}</span>
             </div>
         </div>
         <div className="charId__btn">
             <button onClick={() => goBack()}>Back to list</button>
         </div>
     </div>
+        </>
     )
 }
 

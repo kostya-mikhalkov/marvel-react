@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import React, {lazy, Suspense} from "react";
+import { HelmetProvider } from 'react-helmet-async';
 import AppHeader from "../appHeader/AppHeader";
 import ErrorBoundary from "../../errorboundary/ErrorBoundary";
 // import { Comics } from "../page_comics/comics/comics";
@@ -16,22 +17,24 @@ const FindPage = lazy(() => import('../findPage/findPage.js'));
 function App() {
 
         return (
-            <div className="app">
-                <ErrorBoundary>
-                    <AppHeader/>
-                </ErrorBoundary>
-                <main>
-                   <Suspense fallback={<div>...Load</div>}>
-                       <Routes>
-                                <Route path="/" element={<Main />}/>
-                                <Route path="/comics" element={<Comics />}/>
-                                <Route path="/comics/:comicId" element={<SinglePage />}/>
-                                <Route path="/characters/:charId" element={<FindPage />}/>
-                                <Route path="*" element={<LostPage />}/>
-                       </Routes>
-                   </Suspense>
-                </main>
-            </div>
+            <HelmetProvider>
+                    <div className="app">
+                    <ErrorBoundary>
+                        <AppHeader/>
+                    </ErrorBoundary>
+                    <main>
+                    <Suspense fallback={<div>...Load</div>}>
+                        <Routes>
+                                    <Route path="/" element={<Main />}/>
+                                    <Route path="/comics" element={<Comics />}/>
+                                    <Route path="/comics/:comicId" element={<SinglePage />}/>
+                                    <Route path="/characters/:charId" element={<FindPage />}/>
+                                    <Route path="*" element={<LostPage />}/>
+                        </Routes>
+                    </Suspense>
+                    </main>
+                </div>
+            </HelmetProvider>
         )
     }
 

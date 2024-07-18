@@ -8,9 +8,9 @@ import './charSearchForm.scss';
 const CharSearchForm = () => {
     const [char, setChar] = useState(null);
 
-    useEffect(() => {
-        console.log(char);
-    }, [char]);
+    // useEffect(() => {
+    //     console.log(char);
+    // }, [char]);
 
     const { getCharactersByName } = MarvelService();
 
@@ -25,7 +25,7 @@ const CharSearchForm = () => {
     };
     
     const resultMessage = !char ? null :
-                          char.data.results.length < 1 ? <div className="char__search-error">Персонаж не найден</div> : <div className="char__search-error">Персонаж {char.data.results[0].name} найден</div>
+                          char.length == 0 ? <div className="char__search-error">Персонаж не найден</div> : <div className="char__search-error">Персонаж {char[0].name} найден</div>
 
     return (
         <Formik
@@ -61,9 +61,9 @@ const CharSearchForm = () => {
                             >
                                 <div className="inner">find</div>
                             </button>
-                            {char && char.data && char.data.results.length !== 0 && (
+                            {char && char.length !== 0 && (
                                 <Link className='button button__main'
-                                      to={`/characters/${char.data.results[0].id}`}>
+                                      to={`/characters/${char[0].id}`}>
                                     <div className="inner">View</div>
                                 </Link>
                             )}

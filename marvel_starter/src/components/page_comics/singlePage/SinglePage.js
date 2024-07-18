@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ComicsServices } from '../../../service/ComicsServices';
 import '../comics/comics.css';
@@ -24,7 +25,15 @@ const SinglePage = () => {
     }
     const {images, title, description, prices, pageCount} = char;
     return (
-    <div className="charId__item">
+    <>
+        <Helmet>
+        <meta
+            name="description"
+            content="Single information portal"
+            />
+            <title>Single page</title>
+        </Helmet>
+        <div className="charId__item">
         <div className="charId__flex">
             <img src={images} 
                 className="charId__img"
@@ -40,6 +49,7 @@ const SinglePage = () => {
             <button onClick={() => goBack()}>Back to list</button>
         </div>
     </div>
+    </>
     )
 }
 export default SinglePage;

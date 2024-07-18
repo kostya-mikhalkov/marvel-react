@@ -17,7 +17,7 @@ const MarvelService = () => {
 
     const getCharactersByName = async (name) => {
         const res = await request(`https://gateway.marvel.com:443/v1/public/characters?name=${name}&apikey=916197d592e0c46ca82d7a622dfd9d5d`);
-        return res;
+        return res.data.results.map(item => _transformCharacter(item));
     }
 
     const _transformCharacter = ({name, description, thumbnail, id, ...res}) => {
